@@ -1,17 +1,9 @@
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 
-public class Card extends JComponent
+public class Card
 {
 	private BufferedImage image;
 	private int rank;
@@ -19,8 +11,8 @@ public class Card extends JComponent
 	
 	public Card(int rank, String suit)
 	{
-//		setLayout(new GridBagLayout());
-//		GridBagConstraints gbc = new GridBagConstraints();
+		this.rank = rank;
+		this.suit = suit;
 		
 		String filename = rank + suit + ".png";
 		try
@@ -31,16 +23,15 @@ public class Card extends JComponent
 		{
 			e.printStackTrace();
 		}
-		
-	    JLabel label = new JLabel(new ImageIcon(image));
-//	    gbc.gridx = 0;
-//	    gbc.gridy = 0;
-//	    add(label,gbc);
 	}
 	
-	public void paintComponent(Graphics g)
+	public BufferedImage getImage()
 	{
-		g.drawImage(image, 0, 0, null);
+		return image;
 	}
 	
+	public int getRank()
+	{
+		return rank;
+	}
 }

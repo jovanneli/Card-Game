@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class DeckOfCards 
+public class DeckOfCards
 {
 	private ArrayList<Card> cards;
 	private int[] rank = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
@@ -10,9 +11,9 @@ public class DeckOfCards
 	{
 		cards = new ArrayList<Card>();
 		
-		for(int i = 1; i < suit.length; i++)
+		for(int i = 0; i < suit.length ; i++)
 		{
-			for(int j = 1; j < rank.length; j++)
+			for(int j = 0; j < rank.length; j++)
 			{
 				cards.add(new Card(rank[j], suit[i]));
 			}
@@ -21,17 +22,26 @@ public class DeckOfCards
 	
 	public void shuffle()
 	{
-		for(int i = 0; i < cards.size(); i++)
-		{
-			Card temp = cards.get(i);
-			int randomLocation = (int)(Math.random()*52 + 1);
-			cards.set(i, cards.get(randomLocation));
-			cards.set(randomLocation, temp);
-		}
+		Collections.shuffle(cards);
 	}
 	
-	public Card deal()
+	public ArrayList<Card> deal(int numCards)
 	{
-		return(cards.get(0));
+		ArrayList<Card> drawnCards = new ArrayList<Card>();
+		for(int i = 0; i < numCards; i++)
+		{
+			drawnCards.add(cards.remove(0));
+		}
+		return drawnCards;
+	}
+	
+	public void collect(Card card)
+	{
+		cards.add(card);
+	}
+	
+	public int getNumCards()
+	{
+		return cards.size();
 	}
 }
